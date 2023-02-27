@@ -29,9 +29,6 @@ def upload_image():
 		return redirect(request.url)
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
-		# print(os.path.dirname(__file__)+'/'+UPLOAD_FOLDER+filename)
-		# with open(os.path.dirname(__file__)+'/'+UPLOAD_FOLDER+filename, 'w') as f:
-		# 	f.write('Hello World')
 		file.save(os.path.dirname(__file__)+'/'+UPLOAD_FOLDER+filename)
 		flash('Image successfully uploaded and displayed below')
 		return render_template('upload.html', filename=filename)
@@ -41,7 +38,6 @@ def upload_image():
 
 @app.route('/display/<filename>')
 def display_image(filename):
-	#print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename))
 
 if __name__ == "__main__":
